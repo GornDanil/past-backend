@@ -27,7 +27,7 @@ class PastesRequest extends FormRequest
             'title' => 'required|min:2|max:15',
             'expiration' => 'required',
             'access' => 'required',
-            'message' => 'required|min:15|max:500',
+            'message' => 'required|min:15',
             'lang' => 'required',
         ];
     }

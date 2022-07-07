@@ -66,4 +66,8 @@ Route::get(
     '/paste/all', 
     [ PastesController::class, 'allData' ]
 )->name('contact-data');
+Route::get(
+    '/paste/all/{id}', 
+    [ PastesController::class, 'showOneMessage' ]
+    )->name('contact-data-one');
 
