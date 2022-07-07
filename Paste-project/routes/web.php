@@ -24,13 +24,12 @@ Route::get('/paste', function () {
     return view('paste');
 })->name('paste');
 
-use App\Http\Controllers\PasteController;
+
+
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
-Route::post(
-    '/paste/submit', 
-    [ ContactController::class, 'submit' ]
-)->name('paste-form');
+
+
 
 Route::name('user.')->group(function(){
 
@@ -60,4 +59,11 @@ Route::name('user.')->group(function(){
     
     Route::post('/registration', [RegisterController::class, 'save']);
 });
+use App\Http\Controllers\PastesController;
+
+Route::post('/paste/submit', [ PastesController::class, 'submit' ])->name('paste-form');
+Route::get(
+    '/paste/all', 
+    [ PastesController::class, 'allData' ]
+)->name('contact-data');
 

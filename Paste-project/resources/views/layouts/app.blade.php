@@ -22,5 +22,6 @@
     
     
     @include('inc.footer')
+    
 </body>
 </html>
