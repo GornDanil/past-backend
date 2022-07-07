@@ -21,8 +21,14 @@ class PastesController extends Controller
     return redirect()->route('home')->with('success', 'Сообщение было добавлено');
    }
    public function allData() {
-      $paste = Paste::all;
-      // return view('messages', ['data' => $paste->orderBy('created_at', 'asc')->skip(1)->take(1)->get()]);
-      return view('messages', ['data' => $paste->all()]);
+      //$paste = new Paste();
+      //return view('messages', ['data' => $paste->where('access', '=', 1)->get()]);
+      $paste = Paste::paginate(10);
+
+    return view('messages', ['data' => $paste->where('access', '=', 1)]);
   }
+   public function showOneMessage($id) {
+      $paste = new Paste;
+      return view('one-message', ['data' => $paste->find($id)]);
+   }  
 }
