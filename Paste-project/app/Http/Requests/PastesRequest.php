@@ -24,7 +24,7 @@ class PastesRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:2|max:15',
+            'title' => 'required|min:2|max:100',
             'expiration' => 'required',
             'access' => 'required',
             'message' => 'required|min:15',

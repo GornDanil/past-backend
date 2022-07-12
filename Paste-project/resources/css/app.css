@@ -3,3 +3,10 @@
     width: 100%;
     border: 1px solid black;
 }
+.ala {
+    margin-top: auto;
+    margin-bottom: 0;
+}
+body {
+    height: 100%;
+}
