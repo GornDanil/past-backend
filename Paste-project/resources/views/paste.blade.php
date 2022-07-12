@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title-block') Страница контактов @endsection
+@section('title-block') Публикация @endsection
 
 @section('content')
 
-    <h1>Контакты</h1>
+    <h1>Публикация</h1>
 
     
 
@@ -71,7 +71,7 @@
             </select>
         </div>
         
-        <input type="text" name="user" value="1" placeholder="Укажите язык" id="lang" class="form-control d-none">
+        <input type="text" name="user" value="undefind" placeholder="Укажите язык" id="lang" class="form-control d-none">
             <button type="submit" name="button" id="Update" class="btn btn-success">Отправить</button>
     </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

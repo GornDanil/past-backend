@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PastesController;
+Route::get('/', [ PastesController::class, 'homeData' ])->name('home');
 
 Route::get('/account', function () {
     return view('account');
@@ -26,15 +26,16 @@ Route::get('/paste', function () {
 
 
 
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
 
 
 
 Route::name('user.')->group(function(){
 
-    Route::view('/private', 'private')->middleware('auth')->name('private');
-
+    //Route::view('/private', 'paste')->middleware('auth')->name('private');
+    Route::get(
+        '/private', 
+        [ PastesController::class, 'privateData' ]
+    )->middleware('auth')->name('private');
     Route::get('/login', function(){
         if(Auth::check()){
             return redirect(route('user.private'));
@@ -59,15 +60,15 @@ Route::name('user.')->group(function(){
     
     Route::post('/registration', [RegisterController::class, 'save']);
 });
-use App\Http\Controllers\PastesController;
+
 
 Route::post('/paste/submit', [ PastesController::class, 'submit' ])->name('paste-form');
 Route::get(
     '/paste/all', 
-    [ PastesController::class, 'allData' ]
+    [ PastesController::class, 'allData', 'all' ]
 )->name('contact-data');
 Route::get(
-    '/paste/all/{id}', 
+    '/{id}', 
     [ PastesController::class, 'showOneMessage' ]
     )->name('contact-data-one');
 
