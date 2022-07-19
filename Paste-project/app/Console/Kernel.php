@@ -4,7 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Carbon\Carbon;
+use App\Models\Paste;
 class Kernel extends ConsoleKernel
 {
     /**
@@ -15,7 +16,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function() {
+            // Удаляем посты с истекшим сроком публикации
+            Paste::where('expiration', '1')->where('created_at', '<=', Carbon::now()->subMinutes(10)->toDateTimeString())->delete();
+            Paste::where('expiration', '2')->where('created_at', '<=', Carbon::now()->subMinutes(60)->toDateTimeString())->delete();
+            Paste::where('expiration', '3')->where('created_at', '<=', Carbon::now()->subMinutes(180)->toDateTimeString())->delete();
+            Paste::where('expiration', '4')->where('created_at', '<=', Carbon::now()->subDay()->toDateTimeString())->delete();
+            Paste::where('expiration', '5')->where('created_at', '<=', Carbon::now()->subWeek()->toDateTimeString())->delete();
+            Paste::where('expiration', '6')->where('created_at', '<=', Carbon::now()->subMonth()->toDateTimeString())->delete();
+        })->everyMinute();
+        
+        
+
+
     }
 
     /**
